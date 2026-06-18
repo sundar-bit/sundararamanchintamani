@@ -2057,6 +2057,10 @@
                 <a href="#others">Others</a>
             </div>
             <p class="footer-copy">© 2026 Dr. Sundararaman Chintamani. Alwarpet, Chennai - 600018, India.</p>
+            <p class="footer-copy" style="margin-top:10px; opacity:0.8; font-size:0.8rem;">
+                <span style="color: var(--gold-400);">&#128064;</span>
+                <span id="visitor-count">&hellip;</span> visitors
+            </p>
         </div>
     </footer>
 
@@ -2064,6 +2068,23 @@
         function toggleMenu() {
             document.getElementById('mainNav').classList.toggle('active');
         }
+
+        // Visitor counter (Abacus — free, no-signup hit counter)
+        (function () {
+            var el = document.getElementById('visitor-count');
+            if (!el) return;
+            fetch('https://abacus.jasoncameron.dev/hit/sundararamanchintamani-com/homepage')
+                .then(function (r) { return r.json(); })
+                .then(function (d) {
+                    var n = (d && (d.value !== undefined ? d.value : d.count)) || 0;
+                    el.textContent = Number(n).toLocaleString('en-IN');
+                })
+                .catch(function () {
+                    // If the counter service is unavailable, hide the line gracefully
+                    var p = el.parentElement;
+                    if (p) p.style.display = 'none';
+                });
+        })();
 
         // Toggle dropdowns on mobile
         document.querySelectorAll('.main-nav > ul > li > a').forEach(item => {
